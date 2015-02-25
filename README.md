@@ -1,6 +1,11 @@
 # Intro
-This module manages Raspberry pi, it trims down fat to make pi run fast/leaner based upon http://bit.ly/1cAd6Id
+This module manages Raspberry pi:
 
+  * Trims down fat to make it run fast/leaner based upon http://bit.ly/1cAd6Id
+  * Sets up [mpyst](https://github.com/np1/mps-youtube) for youtube streaming
+  * Setgs up [duckdns](https://duckdns.org/)
+
+Please follow manifests/init.pp for more info.
 
 # Usage
 
