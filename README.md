@@ -1,5 +1,6 @@
 # Intro
-This module manages Raspberry pi 
+This module manages Raspberry pi, it trims down fat to make pi run fast/leaner based upon http://bit.ly/1cAd6Id
+
 
 # Usage
 
