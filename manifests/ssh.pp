@@ -1,4 +1,6 @@
-class pi::ssh {
+class pi::ssh(
+  $port = '2222'
+){
   package{['curl', 'ntp', 'ntpdate', 'ca-certificates', 'binutils']:
     ensure  => present
   }
@@ -14,7 +16,7 @@ class pi::ssh {
   } ->
 
   editfile::config { 'dropbear port':
-    ensure => '2222',
+    ensure => $port,
     path   => '/etc/default/dropbear',
     quote  => false,
     sep    => '=',
