@@ -6,7 +6,6 @@ class pi::profiles::tiny {
   include pi::tty
   include pi::shell
   include pi::swap
-  include pi::mpsyt
   include pi::bootlog
   include pi::ipv6
 
