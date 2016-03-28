@@ -1,8 +1,6 @@
 # Tiny first gen pi profile
 class pi::profiles::tiny {
   include pi::ssh
-  include pi::duckdns
-  include pi::wlan
   include pi::tty
   include pi::shell
   include pi::swap
@@ -17,6 +15,15 @@ class pi::profiles::tiny {
 
   package{'mlocate':
     ensure  => present
+  }
+
+  class {'::shell':
+    include => false
+  }
+
+  class{ '::shell::tmux':
+    tmuxinator => false,
+    conffile   => '.tmux.conf'
   }
 
 }
