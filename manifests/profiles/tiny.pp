@@ -1,6 +1,7 @@
 # Tiny first gen pi profile
 class pi::profiles::tiny {
   include pi::ssh
+  include pi::iptables
   include pi::tty
   include pi::shell
   include pi::swap
