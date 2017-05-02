@@ -8,23 +8,22 @@ wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 iface default inet dhcp
 
 
+<% if not @wireless %>
 # the internal (wired) network interface
-auto eth0
- iface eth0 inet static
+auto  <%= @interface %>
+ iface <%= @interface %> inet static
  address <%=@address%>
  netmask 255.255.255.0
  broadcast <%=@broadcast%>
+<% end %>
 
+<% if @wiresless %>
+# wireless AP
+allow-hotplug <%= @interface %>
+iface <%= @interface %> inet static  
+    address <%=@address%>
+    netmask 255.255.255.0
+    network <%=@network%>
+    broadcast <%=@broadcast%>
+<% end %>
 
-post-up /sbin/iptables -F
-post-up /sbin/iptables -X
-post-up /sbin/iptables -t nat -F
-
-post-up /sbin/iptables -A FORWARD -o wlan0 -i eth0 -s <%=@subnet%> -m conntrack --ctstate NEW -j ACCEPT
-post-up /sbin/iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-post-up /sbin/iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-post-up /sbin/sysctl -w net.ipv4.ip_forward=1
-
-post-up /etc/init.d/dnsmasq restart
-~
-~

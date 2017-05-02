@@ -1,8 +1,8 @@
-# dhcp active for eth0
-interface=eth0
+interface=<%= @interface %>       # Use interface wlan0  
+listen-address=<%= @address %>  # Specify the address to listen on  
+bind-interfaces      # Bind to the interface
+server=<%= @server %>
+domain-needed        # Don't forward short names  
+bogus-priv           # Drop the non-routed address spaces.  
+dhcp-range=<%= @range %> # IP range and lease time  
 
-# no dhcp for wlan0
-no-dhcp-interface=wlan0
-
-# range / Lease-Time
-dhcp-range=interface:eth0,<%=@dhcp_range%>,infinite
