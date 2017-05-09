@@ -36,12 +36,16 @@ class pi::gateway(
     content => template('pi/dnsmasq.conf.erb'),
     owner   => root,
     group   => root,
-  } ~>
+  }
 
-  service{'dnsmasq':
-    ensure    => running,
-    enable    => true,
-    hasstatus => true,
+  if($::environment != 'dev'){
+    File['/etc/dnsmasq.conf'] ~>
+
+    service{'dnsmasq':
+      ensure    => running,
+      enable    => true,
+      hasstatus => true,
+    }
   }
 
   package{'ifplugd':
