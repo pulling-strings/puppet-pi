@@ -14,4 +14,8 @@ class pi::desktop {
   package{$development:
     ensure  => absent
   }
+
+  package{'xscreensaver':
+    ensure  => present
+  }
 }
