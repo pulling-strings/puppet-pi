@@ -1,15 +1,16 @@
 # Setting NAT for AP mode
-class pi::nat {
+class pi::nat(
+) {
   package{'uwf':
     ensure  => absent
   }
   # the file the holds the nat rules
   file { '/usr/bin/routing':
-    ensure => file,
-    mode   => '0644',
-    source => 'puppet:///modules/pi/routing',
-    owner  => root,
-    group  => root,
+    ensure  => file,
+    mode    => '0644',
+    content => template('pi/routing.erb'),
+    owner   => root,
+    group   => root,
   }
 
   package{'dnsmasq':
@@ -30,4 +31,9 @@ class pi::nat {
     hasstatus => true,
   }
 
+  include 'rclocal'
+
+  rclocal::update{ 'iptables restore':
+    content => 'iptables-restore < /etc/iptables.ipv4.nat'
+  }
 }

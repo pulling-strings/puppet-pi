@@ -1,5 +1,9 @@
 # Setting up an access point
-class pi::hostapd {
+class pi::hostapd(
+  $interface = 'eth0',
+  $ssid = 'puppet',
+  $channel = 6
+){
   package{'hostapd':
     ensure  => present
   } ->
