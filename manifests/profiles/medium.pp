@@ -1,6 +1,5 @@
 # Medium first gen pi profile
 class pi::profiles::medium {
-  include pi::ssh
   include pi::shell
 
   package{'mlocate':

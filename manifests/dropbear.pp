@@ -1,10 +1,7 @@
-class pi::ssh(
+# Setting up dropbear instead of openssh conserving resources
+class pi::dropbear(
   $port = '2222'
 ){
-  package{['curl', 'ntp', 'ntpdate', 'ca-certificates', 'binutils']:
-    ensure  => present
-  }
-
   package{['openssh-client', 'dropbear']:
     ensure  => present
   } ->

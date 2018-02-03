@@ -7,7 +7,7 @@ class pi::gateway(
   $broadcast='192.168.1.255',
   $subnet='192.168.1.0/24',
   $range ='192.168.1.15,192.168.1.150,12h',
-  $interface = 'eth0',
+  $interface = 'wlan0',
   $wireless = false,
   $server = '8.8.8.8'
 ){

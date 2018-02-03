@@ -1,11 +1,8 @@
-# Setting NAT for AP mode
-class pi::nat(
-  $lan='',
-  $ap=''
-) {
-  package{'uwf':
-    ensure  => absent
-  }
+# Nat routing and iptables blocking
+class pi::nat (
+  $lan = 'eth0',
+  $ap= 'wlan0'
+){
   # the file the holds the nat rules
   file { '/usr/bin/routing':
     ensure  => file,
@@ -15,27 +12,11 @@ class pi::nat(
     group   => root,
   }
 
-  package{'dnsmasq':
-    ensure  => present
-  } ->
-
-  file { '/etc/dnsmasq.conf':
-    ensure => file,
-    mode   => '0644',
-    source => 'puppet:///modules/pi/dnsmasq.conf',
-    owner  => root,
-    group  => root,
-  } ~>
-
-  service{'dhcpcd':
-    ensure    => running,
-    enable    => true,
-    hasstatus => true,
-  }
-
   include 'rclocal'
 
   rclocal::update{ 'iptables restore':
     content => 'iptables-restore < /etc/iptables.ipv4.nat'
   }
+
+
 }

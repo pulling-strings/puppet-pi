@@ -9,4 +9,8 @@ class pi::shell {
     user    => 'root',
     path    => ['/usr/sbin', '/usr/bin']
   }
+
+  package{['curl', 'ntp', 'ntpdate', 'ca-certificates', 'binutils']:
+    ensure  => present
+  }
 }
