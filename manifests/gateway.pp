@@ -24,7 +24,7 @@ class pi::gateway(
     ensure    => running,
     enable    => true,
     hasstatus => true,
-  }
+  } ~> Service['dnsmasq']
 
   package{'dnsmasq':
     ensure  => present
@@ -38,14 +38,10 @@ class pi::gateway(
     group   => root,
   }
 
-  if($::environment != 'dev'){
-    File['/etc/dnsmasq.conf'] ~>
-
-    service{'dnsmasq':
-      ensure    => running,
-      enable    => true,
-      hasstatus => true,
-    }
+  service{'dnsmasq':
+    ensure    => running,
+    enable    => true,
+    hasstatus => true,
   }
 
   package{'ifplugd':
@@ -55,5 +51,10 @@ class pi::gateway(
   service{'ifplugd':
     ensure => stopped,
     enable => false,
+  }
+
+  file_line { 'ipv4_forwarding':
+    path => '/etc/sysctl.conf',
+    line => 'net.ipv4.ip_forward=1'
   }
 }

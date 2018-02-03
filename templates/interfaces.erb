@@ -2,13 +2,8 @@
 auto lo
 iface lo inet loopback
 
-allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
-iface default inet dhcp
 
-
-<% if not @wireless %>
+<% if @wireless==false %>
 # the internal (wired) network interface
 auto  <%= @interface %>
  iface <%= @interface %> inet static
@@ -17,10 +12,13 @@ auto  <%= @interface %>
  broadcast <%=@broadcast%>
 <% end %>
 
-<% if @wiresless %>
+<% if @wireless==true %>
+auto eth0
+iface eth0 inet dhcp
+
 # wireless AP
 allow-hotplug <%= @interface %>
-iface <%= @interface %> inet static  
+iface <%= @interface %> inet static
     address <%=@address%>
     netmask 255.255.255.0
     network <%=@network%>

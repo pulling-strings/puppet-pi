@@ -18,6 +18,6 @@ class pi::hostapd(
 
   file_line { 'configuration':
     path => '/etc/default/hostapd',
-    line => 'DAEMON_CONF="/etc/hostapd.conf'
+    line => 'DAEMON_CONF="/etc/hostapd.conf"'
   }
 }
