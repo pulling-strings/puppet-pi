@@ -1,5 +1,7 @@
 # Setting NAT for AP mode
 class pi::nat(
+  $lan='',
+  $ap=''
 ) {
   package{'uwf':
     ensure  => absent
