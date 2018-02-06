@@ -1,9 +1,11 @@
 # Setting up an access point
 class pi::hostapd(
+  $passphrase = false
   $interface = 'eth0',
   $ssid = 'puppet',
   $channel = 6
 ){
+  validate_string($passphrase)
   package{'hostapd':
     ensure  => present
   } ->
