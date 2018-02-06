@@ -9,7 +9,8 @@ class pi::gateway(
   $range ='192.168.1.15,192.168.1.150,12h',
   $interface = 'wlan0',
   $wireless = false,
-  $server = '8.8.8.8'
+  $server = '8.8.8.8',
+  $static = []
 ){
 
   file { '/etc/network/interfaces':
